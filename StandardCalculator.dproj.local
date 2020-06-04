@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.939,=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.435,=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.556,C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\Unit1.pas=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\SCalculator.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.556,C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\Unit1.dfm=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\SCalculator.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.008,C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\Project1.dproj=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\StandardCalculator.dproj</Transaction>
-    <Transaction>2020.06.03 15:42:58.246,=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\Unit1.pas</Transaction>
-    <Transaction>2020.06.03 15:44:03.227,C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\Calculation.pas=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.246,=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.227,C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\Unit1.pas=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\Calculation.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.939,=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.556,C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\SCalculator.pas=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.008,C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\StandardCalculator.dproj=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.556,C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\StandardCalculator\SCalculator.dfm=C:\Users\yzu\Documents\Embarcadero\Studio\Projekte\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>

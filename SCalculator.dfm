@@ -22,7 +22,6 @@ object Form1: TForm1
     Align = alTop
     Alignment = taRightJustify
     AutoSize = False
-    Caption = '0'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -35
@@ -94,7 +93,7 @@ object Form1: TForm1
   end
   object tbnDivide: TButton
     Left = 300
-    Top = 216
+    Top = 148
     Width = 100
     Height = 62
     Caption = #247
@@ -154,7 +153,7 @@ object Form1: TForm1
   end
   object tbnMultiple: TButton
     Left = 300
-    Top = 284
+    Top = 216
     Width = 100
     Height = 62
     Caption = #215
@@ -214,7 +213,7 @@ object Form1: TForm1
   end
   object tbnMinus: TButton
     Left = 300
-    Top = 352
+    Top = 284
     Width = 100
     Height = 62
     Caption = '-'
@@ -240,6 +239,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 12
+    OnClick = tbnNegativeClick
   end
   object tbnNum0: TButton
     Left = 100
@@ -269,10 +269,11 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 14
+    OnClick = tbnCommaClick
   end
   object tbnAdd: TButton
     Left = 300
-    Top = 420
+    Top = 352
     Width = 100
     Height = 62
     Caption = '+'
@@ -287,17 +288,18 @@ object Form1: TForm1
   end
   object tbnEqualsTo: TButton
     Left = 300
-    Top = 148
+    Top = 420
     Width = 100
     Height = 62
     Caption = '='
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -21
-    Font.Name = 'Tahoma'
+    Font.Height = -48
+    Font.Name = 'Microsoft YaHei'
     Font.Style = []
     ParentFont = False
     TabOrder = 16
+    OnClick = tbnEqualsToClick
   end
   object btnClear: TButton
     Left = 200
