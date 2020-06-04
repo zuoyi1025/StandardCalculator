@@ -30,7 +30,7 @@ type
 
 implementation
 
-/// ///////////////////////////////////////
+//constructor
 constructor Calculator.Create;
 begin
 
@@ -40,6 +40,7 @@ begin
   currOperator := #0;
 end;
 
+//clear all values
 procedure Calculator.clear;
 begin
   currExp := '';
@@ -122,7 +123,9 @@ begin
   begin
     currExp := '0' + inputChar;
   end
-  else if RightStr(currExp, 1) = '+' then
+  else if (RightStr(currExp, 1) = '+') or (RightStr(currExp, 1) = '-') or
+    (RightStr(currExp, 1) = '*') or (RightStr(currExp, 1) = '/') or
+    (RightStr(currExp, 1) = '=') then
   begin
     delete(currExp, length(currExp), 1);
   end;
