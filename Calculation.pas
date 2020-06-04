@@ -119,9 +119,9 @@ end;
 //
 function Calculator.updateWithChar(inputChar: Char): String;
 begin
-  if (currExp = 'ERROR DIV BY 0') or (currExp = '') then
+  if (currExp = 'ERROR DIV BY 0') then
   begin
-    currExp := '0' + inputChar;
+    currExp := '0';
   end
   else if (RightStr(currExp, 1) = '+') or (RightStr(currExp, 1) = '-') or
     (RightStr(currExp, 1) = '*') or (RightStr(currExp, 1) = '/') or

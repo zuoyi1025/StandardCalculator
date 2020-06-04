@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   ActiveControl = tbnEqualsTo
   AutoSize = True
-  Caption = 'Standard Calculator v0.1'
+  Caption = 'Standard Calculator v0.2'
   ClientHeight = 482
   ClientWidth = 400
   Color = clBtnFace
@@ -13,6 +13,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnShow = form1OnShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -48,39 +49,7 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object tbnNum7: TButton
-    Left = 0
-    Top = 216
-    Width = 100
-    Height = 62
-    Caption = '7'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -21
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 0
-    TabStop = False
-    OnClick = tbnNum7Click
-  end
-  object tbnNum8: TButton
-    Left = 100
-    Top = 216
-    Width = 100
-    Height = 62
-    Caption = '8'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -21
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 1
-    TabStop = False
-    OnClick = tbnNum8Click
-  end
-  object tbnNum9: TButton
+  object tbnNum9: TSpeedButton
     Left = 200
     Top = 216
     Width = 100
@@ -92,11 +61,37 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 2
-    TabStop = False
     OnClick = tbnNum9Click
   end
-  object tbnDivide: TButton
+  object tbnNum7: TSpeedButton
+    Left = 0
+    Top = 216
+    Width = 100
+    Height = 62
+    Caption = '7'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    OnClick = tbnNum7Click
+  end
+  object tbnNum8: TSpeedButton
+    Left = 100
+    Top = 216
+    Width = 100
+    Height = 62
+    Caption = '8'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    OnClick = tbnNum8Click
+  end
+  object tbnDivide: TSpeedButton
     Left = 300
     Top = 148
     Width = 100
@@ -108,11 +103,9 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 3
-    TabStop = False
     OnClick = tbnDivideClick
   end
-  object tbnNum4: TButton
+  object tbnNum4: TSpeedButton
     Left = 0
     Top = 284
     Width = 100
@@ -124,11 +117,9 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 4
-    TabStop = False
     OnClick = tbnNum4Click
   end
-  object tbnNum5: TButton
+  object tbnNum5: TSpeedButton
     Left = 100
     Top = 284
     Width = 100
@@ -140,11 +131,9 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 5
-    TabStop = False
     OnClick = tbnNum5Click
   end
-  object tbnNum6: TButton
+  object tbnNum6: TSpeedButton
     Left = 200
     Top = 284
     Width = 100
@@ -156,11 +145,9 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 6
-    TabStop = False
     OnClick = tbnNum6Click
   end
-  object tbnMultiple: TButton
+  object tbnMultiple: TSpeedButton
     Left = 300
     Top = 216
     Width = 100
@@ -172,11 +159,9 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 7
-    TabStop = False
     OnClick = tbnMultipleClick
   end
-  object tbnNum1: TButton
+  object tbnNum1: TSpeedButton
     Left = 0
     Top = 352
     Width = 100
@@ -188,11 +173,9 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 8
-    TabStop = False
     OnClick = tbnNum1Click
   end
-  object tbnNum2: TButton
+  object tbnNum2: TSpeedButton
     Left = 100
     Top = 352
     Width = 100
@@ -204,11 +187,9 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 9
-    TabStop = False
     OnClick = tbnNum2Click
   end
-  object tbnNum3: TButton
+  object tbnNum3: TSpeedButton
     Left = 200
     Top = 352
     Width = 100
@@ -220,11 +201,9 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 10
-    TabStop = False
     OnClick = tbnNum3Click
   end
-  object tbnMinus: TButton
+  object tbnMinus: TSpeedButton
     Left = 300
     Top = 284
     Width = 100
@@ -236,27 +215,23 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 11
-    TabStop = False
     OnClick = tbnMinusClick
   end
-  object tbnNegative: TButton
+  object tbnNegative: TSpeedButton
     Left = 0
     Top = 420
     Width = 100
     Height = 62
     Caption = '+/-'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clRed
     Font.Height = -21
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 12
-    TabStop = False
     OnClick = tbnNegativeClick
   end
-  object tbnNum0: TButton
+  object tbnNum0: TSpeedButton
     Left = 100
     Top = 420
     Width = 100
@@ -268,27 +243,23 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 13
-    TabStop = False
     OnClick = tbnNum0Click
   end
-  object tbnComma: TButton
+  object tbnComma: TSpeedButton
     Left = 200
     Top = 420
     Width = 100
     Height = 62
     Caption = ','
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clRed
     Font.Height = -21
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 14
-    TabStop = False
     OnClick = tbnCommaClick
   end
-  object tbnAdd: TButton
+  object tbnAdd: TSpeedButton
     Left = 300
     Top = 352
     Width = 100
@@ -300,9 +271,21 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 15
-    TabStop = False
     OnClick = tbnAddClick
+  end
+  object btnClear: TSpeedButton
+    Left = 200
+    Top = 148
+    Width = 100
+    Height = 62
+    Caption = 'C'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    OnClick = btnClearClick
   end
   object tbnEqualsTo: TButton
     Left = 300
@@ -316,24 +299,8 @@ object Form1: TForm1
     Font.Name = 'Microsoft YaHei'
     Font.Style = []
     ParentFont = False
-    TabOrder = 16
+    TabOrder = 0
     OnClick = tbnEqualsToClick
     OnKeyDown = tbnEqualsToKeyDown
-  end
-  object btnClear: TButton
-    Left = 200
-    Top = 148
-    Width = 100
-    Height = 62
-    Caption = 'C'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -21
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 17
-    TabStop = False
-    OnClick = btnClearClick
   end
 end

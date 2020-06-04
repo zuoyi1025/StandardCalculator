@@ -5,30 +5,31 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Calculation;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Calculation,
+  Vcl.Buttons;
 
 type
   TForm1 = class(TForm)
     tlbExpression: TLabel;
-    tbnNum7: TButton;
-    tbnNum8: TButton;
-    tbnNum9: TButton;
-    tbnDivide: TButton;
-    tbnNum4: TButton;
-    tbnNum5: TButton;
-    tbnNum6: TButton;
-    tbnMultiple: TButton;
-    tbnNum1: TButton;
-    tbnNum2: TButton;
-    tbnNum3: TButton;
-    tbnMinus: TButton;
-    tbnNegative: TButton;
-    tbnNum0: TButton;
-    tbnComma: TButton;
-    tbnAdd: TButton;
+    tbnNum7: TSpeedButton;
+    tbnNum8: TSpeedButton;
+    tbnNum9: TSpeedButton;
+    tbnDivide: TSpeedButton;
+    tbnNum4: TSpeedButton;
+    tbnNum5: TSpeedButton;
+    tbnNum6: TSpeedButton;
+    tbnMultiple: TSpeedButton;
+    tbnNum1: TSpeedButton;
+    tbnNum2: TSpeedButton;
+    tbnNum3: TSpeedButton;
+    tbnMinus: TSpeedButton;
+    tbnNegative: TSpeedButton;
+    tbnNum0: TSpeedButton;
+    tbnComma: TSpeedButton;
+    tbnAdd: TSpeedButton;
     tbnEqualsTo: TButton;
     tlbResult: TLabel;
-    btnClear: TButton;
+    btnClear: TSpeedButton;
     procedure tbnNum7Click(Sender: TObject);
     procedure form1OnShow(Sender: TObject);
     procedure tbnNum8Click(Sender: TObject);
@@ -87,6 +88,8 @@ end;
 procedure TForm1.form1OnShow(Sender: TObject);
 begin
   sCal := Calculation.Calculator.Create;
+  ShowMessage
+    ('Attention: please use SPACE button on your keyboard als '' = '' to get the calculation result!');
 
 end;
 
@@ -98,8 +101,8 @@ end;
 
 procedure TForm1.tbnCommaClick(Sender: TObject);
 begin
-  updateExpCaption(sCal.ResultExpression);
-
+  ShowMessage('TODO: not implemented yet.');
+  // updateExpCaption(sCal.ResultExpression);
 end;
 
 procedure TForm1.tbnDivideClick(Sender: TObject);
@@ -115,10 +118,81 @@ begin
   updateExpCaption(sCal.ResultExpression);
 end;
 
+// receive input from keyboard
+// Focus is always on tbnEqualsTo!
 procedure TForm1.tbnEqualsToKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  ShowMessage('test form key down');
+  // TODO: BUG: ENTER oder SPACE wiederholt die letzte Eingabe
+  //ShowMessage('the value of key is : ' + IntToStr(Key));
+  case Key of
+    32:
+      begin
+        self.tbnEqualsToClick(Sender);
+      end;
+    67:
+      begin
+        self.btnClearClick(Sender);
+      end;
+    107:
+      begin
+        self.tbnAddClick(Sender);
+      end;
+    109:
+      begin
+        self.tbnMinusClick(Sender);
+      end;
+    106:
+      begin
+        self.tbnMultipleClick(Sender);
+      end;
+    111:
+      begin
+        self.tbnDivideClick(Sender);
+      end;
+    48, 96:
+      begin
+        self.tbnNum0Click(Sender);
+      end;
+    49, 97:
+      begin
+        self.tbnNum1Click(Sender);
+      end;
+    50, 98:
+      begin
+        self.tbnNum2Click(Sender);
+      end;
+    51, 99:
+      begin
+        self.tbnNum3Click(Sender);
+      end;
+    52, 100:
+      begin
+        self.tbnNum4Click(Sender);
+      end;
+    53, 101:
+      begin
+        self.tbnNum5Click(Sender);
+      end;
+    54, 102:
+      begin
+        self.tbnNum6Click(Sender);
+      end;
+    55, 103:
+      begin
+        self.tbnNum7Click(Sender);
+      end;
+    56, 104:
+      begin
+        self.tbnNum8Click(Sender);
+      end;
+    57, 105:
+      begin
+        self.tbnNum9Click(Sender);
+      end;
+
+  end;
+  Key := 0;
 end;
 
 procedure TForm1.tbnMinusClick(Sender: TObject);
@@ -136,7 +210,8 @@ end;
 
 procedure TForm1.tbnNegativeClick(Sender: TObject);
 begin
-  updateExpCaption(sCal.ResultExpression);
+  ShowMessage('TODO: not implemented yet.');
+  // updateExpCaption(sCal.ResultExpression);
 
 end;
 
