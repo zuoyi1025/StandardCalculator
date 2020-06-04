@@ -11,8 +11,11 @@ type
   private
     currResult: real; // the real number in the upper line of result
     currExp: string; // the current expresion, may ends with operator
-    currOperand: Integer; // the integer in the lower line of input
     currOperator: Char; // the last saved operator
+
+    currOperand: Integer; // the integer in the lower line of input
+    tempOperand: Integer;
+    // the temporary value to check if the integer is ouf of bound
 
   public
 
@@ -90,13 +93,18 @@ end;
 // update currResult or currOperand according to input number
 function Calculator.updateWithNum(inputNum: Integer): String;
 begin
-
   if (currExp = 'ERROR DIV BY 0') or (currExp = '') then
   begin
     currExp := IntToStr(inputNum);
   end
   else
     currExp := currExp + IntToStr(inputNum);
+
+
+ // tempOperand := ;
+//  if (tempOperand > 2147483647) or (tempOperand < 0) then
+//    exit;
+//TODO: bug fix: operand out of bound
 
   if currOperator <> #0 then
   begin
@@ -106,7 +114,7 @@ begin
   end
   else if currResult <> 0 then
   begin
-    currResult := currResult * 10 + inputNum;
+    currResult := currOperand * 10 + inputNum;
     result := FloatToStr(self.currResult);
   end
   else
@@ -114,6 +122,8 @@ begin
     currResult := inputNum;
     result := FloatToStr(self.currResult);
   end;
+
+
 end;
 
 //

@@ -88,8 +88,7 @@ end;
 procedure TForm1.form1OnShow(Sender: TObject);
 begin
   sCal := Calculation.Calculator.Create;
-  ShowMessage
-    ('Attention: please use SPACE button on your keyboard als '' = '' to get the calculation result!');
+  // ShowMessage('You can also use SPACE a ENTER');
 
 end;
 
@@ -124,71 +123,71 @@ procedure TForm1.tbnEqualsToKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   // TODO: BUG: ENTER oder SPACE wiederholt die letzte Eingabe
-  //ShowMessage('the value of key is : ' + IntToStr(Key));
+  // ShowMessage('the value of key is : ' + IntToStr(Key));
   case Key of
     32:
       begin
-        self.tbnEqualsToClick(Sender);
+        self.tbnEqualsTo.Click;
       end;
     67:
       begin
-        self.btnClearClick(Sender);
+        self.btnClear.Click;
       end;
     107:
       begin
-        self.tbnAddClick(Sender);
+        self.tbnAdd.Click;
       end;
     109:
       begin
-        self.tbnMinusClick(Sender);
+        self.tbnMinus.Click;
       end;
     106:
       begin
-        self.tbnMultipleClick(Sender);
+        self.tbnMultiple.Click;
       end;
     111:
       begin
-        self.tbnDivideClick(Sender);
+        self.tbnDivide.Click;
       end;
     48, 96:
       begin
-        self.tbnNum0Click(Sender);
+        self.tbnNum0.Click;
       end;
     49, 97:
       begin
-        self.tbnNum1Click(Sender);
+        self.tbnNum1.Click;
       end;
     50, 98:
       begin
-        self.tbnNum2Click(Sender);
+        self.tbnNum2.Click;
       end;
     51, 99:
       begin
-        self.tbnNum3Click(Sender);
+        self.tbnNum3.Click;
       end;
     52, 100:
       begin
-        self.tbnNum4Click(Sender);
+        self.tbnNum4.Click;
       end;
     53, 101:
       begin
-        self.tbnNum5Click(Sender);
+        self.tbnNum5.Click;
       end;
     54, 102:
       begin
-        self.tbnNum6Click(Sender);
+        self.tbnNum6.Click;
       end;
     55, 103:
       begin
-        self.tbnNum7Click(Sender);
+        self.tbnNum7.Click;
       end;
     56, 104:
       begin
-        self.tbnNum8Click(Sender);
+        self.tbnNum8.Click;
       end;
     57, 105:
       begin
-        self.tbnNum9Click(Sender);
+        self.tbnNum9.Click;
       end;
 
   end;

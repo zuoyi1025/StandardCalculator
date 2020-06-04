@@ -24,23 +24,22 @@ object Form1: TForm1
     Height = 42
     Align = alTop
     Alignment = taRightJustify
-    AutoSize = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -35
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    ExplicitLeft = 381
-    ExplicitWidth = 19
+    WordWrap = True
+    ExplicitLeft = 389
+    ExplicitWidth = 11
   end
   object tlbResult: TLabel
-    Left = 0
+    Left = 375
     Top = 65
-    Width = 400
+    Width = 25
     Height = 48
     Alignment = taRightJustify
-    AutoSize = False
     Caption = '0'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -48,6 +47,7 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+    WordWrap = True
   end
   object tbnNum9: TSpeedButton
     Left = 200
