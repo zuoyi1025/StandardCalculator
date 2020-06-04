@@ -114,7 +114,7 @@ begin
   end
   else if currResult <> 0 then
   begin
-    currResult := currOperand * 10 + inputNum;
+    currResult := currResult * 10 + inputNum;
     result := FloatToStr(self.currResult);
   end
   else
