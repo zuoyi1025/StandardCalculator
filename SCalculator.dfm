@@ -1,8 +1,10 @@
 object Form1: TForm1
   Left = 0
   Top = 0
+  ActiveControl = tbnEqualsTo
+  AutoSize = True
   Caption = 'Standard Calculator v0.1'
-  ClientHeight = 488
+  ClientHeight = 482
   ClientWidth = 400
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -59,6 +61,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    TabStop = False
     OnClick = tbnNum7Click
   end
   object tbnNum8: TButton
@@ -74,6 +77,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    TabStop = False
     OnClick = tbnNum8Click
   end
   object tbnNum9: TButton
@@ -89,6 +93,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    TabStop = False
     OnClick = tbnNum9Click
   end
   object tbnDivide: TButton
@@ -104,6 +109,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 3
+    TabStop = False
     OnClick = tbnDivideClick
   end
   object tbnNum4: TButton
@@ -119,6 +125,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 4
+    TabStop = False
     OnClick = tbnNum4Click
   end
   object tbnNum5: TButton
@@ -134,6 +141,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 5
+    TabStop = False
     OnClick = tbnNum5Click
   end
   object tbnNum6: TButton
@@ -149,6 +157,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 6
+    TabStop = False
     OnClick = tbnNum6Click
   end
   object tbnMultiple: TButton
@@ -164,6 +173,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 7
+    TabStop = False
     OnClick = tbnMultipleClick
   end
   object tbnNum1: TButton
@@ -179,6 +189,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 8
+    TabStop = False
     OnClick = tbnNum1Click
   end
   object tbnNum2: TButton
@@ -194,6 +205,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 9
+    TabStop = False
     OnClick = tbnNum2Click
   end
   object tbnNum3: TButton
@@ -209,6 +221,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 10
+    TabStop = False
     OnClick = tbnNum3Click
   end
   object tbnMinus: TButton
@@ -224,6 +237,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 11
+    TabStop = False
     OnClick = tbnMinusClick
   end
   object tbnNegative: TButton
@@ -239,6 +253,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 12
+    TabStop = False
     OnClick = tbnNegativeClick
   end
   object tbnNum0: TButton
@@ -254,6 +269,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 13
+    TabStop = False
     OnClick = tbnNum0Click
   end
   object tbnComma: TButton
@@ -269,6 +285,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 14
+    TabStop = False
     OnClick = tbnCommaClick
   end
   object tbnAdd: TButton
@@ -284,6 +301,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 15
+    TabStop = False
     OnClick = tbnAddClick
   end
   object tbnEqualsTo: TButton
@@ -300,6 +318,7 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 16
     OnClick = tbnEqualsToClick
+    OnKeyDown = tbnEqualsToKeyDown
   end
   object btnClear: TButton
     Left = 200
@@ -314,6 +333,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 17
+    TabStop = False
     OnClick = btnClearClick
   end
 end

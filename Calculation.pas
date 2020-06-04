@@ -30,7 +30,7 @@ type
 
 implementation
 
-//constructor
+// constructor
 constructor Calculator.Create;
 begin
 
@@ -40,7 +40,7 @@ begin
   currOperator := #0;
 end;
 
-//clear all values
+// clear all values
 procedure Calculator.clear;
 begin
   currExp := '';
@@ -130,15 +130,18 @@ begin
     delete(currExp, length(currExp), 1);
   end;
 
-  currExp := currExp + inputChar;
-
   if currOperator <> #0 then
   begin
     self.calculateWithOperand;
     currOperator := inputChar;
+    if (RightStr(currExp, 1) <> ')') or (LeftStr(currExp, 1) <> '(') then
+      currExp := '(' + currExp + ')';
+    currExp := currExp + inputChar;
     result := FloatToStr(self.currResult);
     exit;
   end;
+
+  currExp := currExp + inputChar;
 
   currOperator := inputChar;
   result := self.currOperator;

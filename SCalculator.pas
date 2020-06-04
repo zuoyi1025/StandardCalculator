@@ -48,6 +48,8 @@ type
     procedure tbnEqualsToClick(Sender: TObject);
     procedure tbnNegativeClick(Sender: TObject);
     procedure tbnCommaClick(Sender: TObject);
+    procedure tbnEqualsToKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
 
   private
     { Private-Deklarationen }
@@ -85,6 +87,7 @@ end;
 procedure TForm1.form1OnShow(Sender: TObject);
 begin
   sCal := Calculation.Calculator.Create;
+
 end;
 
 procedure TForm1.tbnAddClick(Sender: TObject);
@@ -110,6 +113,12 @@ begin
   sCal.calculateWithOperand;
   updateResultNumCap(sCal.resultNumber);
   updateExpCaption(sCal.ResultExpression);
+end;
+
+procedure TForm1.tbnEqualsToKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  ShowMessage('test form key down');
 end;
 
 procedure TForm1.tbnMinusClick(Sender: TObject);
