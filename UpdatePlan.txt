@@ -1,5 +1,6 @@
 
-#COMMA, NEGATIVE, CE
+#NEGATIVE
 
-#BACKSPACE Taste
+#todo bugfix:program cannot do 0.00001  or 0.10000023
+
 

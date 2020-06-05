@@ -9,6 +9,7 @@ type
   InputStatus = (FIRST_NUM, THE_OPERATOR, SECOND_NUM);
 
   Calculator = Class
+
   private
     currExp: string; // the current expresion, may ends with operator
 
@@ -16,20 +17,22 @@ type
     currOperator: Char; // the last saved operator
     secondOperand: real;
     iStatus: InputStatus;
-    function getNewStringAfterBackspace(var realNum: real): String;
+    isRecevingDecimalPlaces: Boolean;
+    function appendLastDigitOfReal(var realNum: real;
+      var shallAddSeperator: Boolean; inputNum: Integer): String;
+    function deleteLastDigitOfReal(var realNum: real): String;
 
   public
-
     procedure calculateWithOperand;
     procedure reset;
     procedure clearEntry;
+    function updateWithDecimalSeperator: String;
     function updateWithNum(inputNum: Integer): String;
     function updateWithOperator(inputChar: Char): String;
     function backspace: String;
     constructor Create;
 
     property ResultExpression: String read currExp;
-    // TODO:func updates resExp
     property ResultNumber: real read currResult;
     // property ResultString: String read getResultString;
 
@@ -45,10 +48,44 @@ begin
   secondOperand := 0;
   currOperator := #0;
   iStatus := FIRST_NUM;
+  isRecevingDecimalPlaces := false;
 end;
 
-function Calculator.getNewStringAfterBackspace(var realNum: real): String;
+function Calculator.appendLastDigitOfReal(var realNum: real;
+  var shallAddSeperator: Boolean; inputNum: Integer): String;
 begin
+  case shallAddSeperator of
+    true:
+      begin
+        if (frac(realNum) <> 0) then
+        begin
+          ShowMessage('sorry, cannot add comma to a non-int number!');
+          exit;
+        end;
+        // TODO: bugfix: program cannot do 0.00001  or 0.10000023 ?
+        result := FloatToStr(realNum) + ',' + IntToStr(inputNum);
+        realNum := StrToFloat(result);
+        shallAddSeperator := false;
+      end;
+    false:
+      begin
+        if realNum = 0 then
+        begin
+          result := IntToStr(inputNum);
+          realNum := inputNum;
+        end
+        else
+        begin
+          result := FloatToStr(realNum) + IntToStr(inputNum);
+          realNum := StrToFloat(result);
+        end;
+      end;
+  end;
+end;
+
+function Calculator.deleteLastDigitOfReal(var realNum: real): String;
+begin
+  // TODO consider dec point
   result := FloatToStr(realNum);
   delete(result, length(result), 1);
   if result = '' then
@@ -64,6 +101,7 @@ begin
   secondOperand := 0;
   currOperator := #0;
   iStatus := FIRST_NUM;
+  isRecevingDecimalPlaces := false;
 end;
 
 function Calculator.backspace: String;
@@ -71,7 +109,7 @@ begin
   case iStatus of
     FIRST_NUM:
       begin
-        result := self.getNewStringAfterBackspace(currResult);
+        result := self.deleteLastDigitOfReal(currResult);
       end;
     THE_OPERATOR:
       begin
@@ -79,7 +117,7 @@ begin
       end;
     SECOND_NUM:
       begin
-        result := self.getNewStringAfterBackspace(secondOperand);
+        result := self.deleteLastDigitOfReal(secondOperand);
       end;
   end;
 
@@ -144,6 +182,37 @@ begin
 
 end;
 
+function Calculator.updateWithDecimalSeperator: String;
+begin
+  case iStatus of
+    FIRST_NUM:
+      begin
+        if frac(currResult) = 0 then
+        begin
+          result := FloatToStr(currResult) + ',';
+          self.isRecevingDecimalPlaces := true;
+        end;
+      end;
+    THE_OPERATOR:
+      begin
+        result := FloatToStr(secondOperand) + ',';
+        iStatus := SECOND_NUM;
+        self.isRecevingDecimalPlaces := true;
+      end;
+    SECOND_NUM:
+      begin
+        if frac(secondOperand) = 0 then
+        begin
+          if secondOperand = 0 then
+            result := FloatToStr(secondOperand) + ',';
+          self.isRecevingDecimalPlaces := true;
+        end;
+      end;
+
+  end;
+
+end;
+
 function Calculator.updateWithNum(inputNum: Integer): String;
 // update currResult or secondOperand according to input number
 begin
@@ -157,8 +226,8 @@ begin
   case iStatus of
     FIRST_NUM:
       begin
-        currResult := currResult * 10 + inputNum;
-        result := FloatToStr(self.currResult);
+        result := self.appendLastDigitOfReal(currResult,
+          isRecevingDecimalPlaces, inputNum);
       end;
     THE_OPERATOR:
       begin
@@ -175,8 +244,8 @@ begin
       end;
     SECOND_NUM:
       begin
-        secondOperand := secondOperand * 10 + inputNum;
-        result := FloatToStr(self.secondOperand);
+        result := self.appendLastDigitOfReal(secondOperand,
+          isRecevingDecimalPlaces, inputNum);
 
       end;
   end;
@@ -199,6 +268,7 @@ begin
     FIRST_NUM:
       begin
         currExp := FloatToStr(currResult);
+        isRecevingDecimalPlaces := false;
         iStatus := THE_OPERATOR;
         currOperator := inputChar;
         result := currOperator;
@@ -223,6 +293,7 @@ begin
 
     SECOND_NUM:
       begin
+        isRecevingDecimalPlaces := false;
         self.calculateWithOperand;
         result := FloatToStr(self.currResult);
         iStatus := THE_OPERATOR;

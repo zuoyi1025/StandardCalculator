@@ -252,7 +252,7 @@ object Form1: TForm1
     Height = 62
     Caption = ','
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
+    Font.Color = clBlack
     Font.Height = -21
     Font.Name = 'Tahoma'
     Font.Style = []

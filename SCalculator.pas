@@ -115,8 +115,7 @@ end;
 
 procedure TForm1.tbnCommaClick(Sender: TObject);
 begin
-  ShowMessage('TODO: not implemented yet.');
-  // updateExpCaption(sCal.ResultExpression);
+  tlbResult.caption := sCal.updateWithDecimalSeperator;
 end;
 
 procedure TForm1.tbnDivideClick(Sender: TObject);
@@ -137,7 +136,6 @@ end;
 procedure TForm1.tbnEqualsToKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  // TODO: BUG: ENTER oder SPACE wiederholt die letzte Eingabe
   // ShowMessage('the value of key is : ' + IntToStr(Key));
   case Key of
     8:
@@ -167,6 +165,10 @@ begin
     111:
       begin
         self.tbnDivide.Click;
+      end;
+    110, 188:
+      begin
+        self.tbnComma.Click;
       end;
     48, 96:
       begin
