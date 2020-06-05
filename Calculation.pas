@@ -8,6 +8,17 @@ uses
 type
   InputStatus = (FIRST_NUM, THE_OPERATOR, SECOND_NUM);
 
+  RealNumber = class
+  private
+    isNegativ: Boolean;
+    integerPart: integer;
+    fracPart: integer;
+    lengthOfDecimalPlaces: integer;
+  public
+    // TODO getValueOfReal:real;
+    // TODO etc.
+  end;
+
   Calculator = Class
 
   private
@@ -19,7 +30,7 @@ type
     iStatus: InputStatus;
     isRecevingDecimalPlaces: Boolean;
     function appendLastDigitOfReal(var realNum: real;
-      var shallAddSeperator: Boolean; inputNum: Integer): String;
+      var shallAddSeperator: Boolean; inputNum: integer): String;
     function deleteLastDigitOfReal(var realNum: real): String;
 
   public
@@ -27,7 +38,8 @@ type
     procedure reset;
     procedure clearEntry;
     function updateWithDecimalSeperator: String;
-    function updateWithNum(inputNum: Integer): String;
+    function updateWithNegative: String;
+    function updateWithNum(inputNum: integer): String;
     function updateWithOperator(inputChar: Char): String;
     function backspace: String;
     constructor Create;
@@ -52,7 +64,7 @@ begin
 end;
 
 function Calculator.appendLastDigitOfReal(var realNum: real;
-  var shallAddSeperator: Boolean; inputNum: Integer): String;
+  var shallAddSeperator: Boolean; inputNum: integer): String;
 begin
   case shallAddSeperator of
     true:
@@ -63,6 +75,7 @@ begin
           exit;
         end;
         // TODO: bugfix: program cannot do 0.00001  or 0.10000023 ?
+        // idea: change the real number into Record or Class, then it will be easier
         result := FloatToStr(realNum) + ',' + IntToStr(inputNum);
         realNum := StrToFloat(result);
         shallAddSeperator := false;
@@ -213,7 +226,12 @@ begin
 
 end;
 
-function Calculator.updateWithNum(inputNum: Integer): String;
+function Calculator.updateWithNegative: String;
+begin
+  ShowMessage('not implemented: Calculator.updateWithNegative');
+end;
+
+function Calculator.updateWithNum(inputNum: integer): String;
 // update currResult or secondOperand according to input number
 begin
   if (currExp = 'ERROR DIV BY 0') then

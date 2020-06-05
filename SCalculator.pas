@@ -230,9 +230,7 @@ end;
 
 procedure TForm1.tbnNegativeClick(Sender: TObject);
 begin
-  ShowMessage('TODO: not implemented yet.');
-  // updateExpCaption(sCal.ResultExpression);
-
+  tlbResult.caption := sCal.updateWithNegative;
 end;
 
 procedure TForm1.tbnNum0Click(Sender: TObject);
