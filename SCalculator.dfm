@@ -294,12 +294,12 @@ object Form1: TForm1
     Height = 62
     Caption = 'CE'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
+    Font.Color = clBlack
     Font.Height = -21
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    OnClick = tbnClearClick
+    OnClick = tbnClearEntryClick
   end
   object tbnBackspace: TSpeedButton
     Left = 0

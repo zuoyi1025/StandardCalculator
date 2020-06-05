@@ -22,6 +22,7 @@ type
 
     procedure calculateWithOperand;
     procedure reset;
+    procedure clearEntry;
     function updateWithNum(inputNum: Integer): String;
     function updateWithOperator(inputChar: Char): String;
     function backspace: String;
@@ -43,7 +44,7 @@ begin
   currResult := 0;
   secondOperand := 0;
   currOperator := #0;
-  iStatus := InputStatus.FIRST_NUM;
+  iStatus := FIRST_NUM;
 end;
 
 function Calculator.getNewStringAfterBackspace(var realNum: real): String;
@@ -62,21 +63,21 @@ begin
   currResult := 0;
   secondOperand := 0;
   currOperator := #0;
-  iStatus := InputStatus.FIRST_NUM;
+  iStatus := FIRST_NUM;
 end;
 
 function Calculator.backspace: String;
 begin
   case iStatus of
-    InputStatus.FIRST_NUM:
+    FIRST_NUM:
       begin
         result := self.getNewStringAfterBackspace(currResult);
       end;
-    InputStatus.THE_OPERATOR:
+    THE_OPERATOR:
       begin
         result := FloatToStr(currResult);
       end;
-    InputStatus.SECOND_NUM:
+    SECOND_NUM:
       begin
         result := self.getNewStringAfterBackspace(secondOperand);
       end;
@@ -88,7 +89,7 @@ procedure Calculator.calculateWithOperand;
 // calculate the temporary result with the operand
 
 begin
-  if iStatus <> InputStatus.SECOND_NUM then
+  if iStatus <> SECOND_NUM then
     exit;
 
   currExp := currExp + FloatToStr(secondOperand);
@@ -126,7 +127,21 @@ begin
   end;
   secondOperand := 0;
   currOperator := #0;
-  iStatus := InputStatus.THE_OPERATOR;
+  iStatus := THE_OPERATOR;
+end;
+
+procedure Calculator.clearEntry;
+begin
+  case iStatus of
+    FIRST_NUM:
+      self.currResult := 0;
+    THE_OPERATOR:
+      ; // do nothing
+    SECOND_NUM:
+      self.secondOperand := 0;
+
+  end;
+
 end;
 
 function Calculator.updateWithNum(inputNum: Integer): String;
@@ -136,22 +151,29 @@ begin
   begin
     self.reset;
     currExp := IntToStr(inputNum);
-    iStatus := InputStatus.FIRST_NUM;
+    iStatus := FIRST_NUM;
   end;
 
   case iStatus of
-    InputStatus.FIRST_NUM:
+    FIRST_NUM:
       begin
         currResult := currResult * 10 + inputNum;
         result := FloatToStr(self.currResult);
       end;
-    InputStatus.THE_OPERATOR:
+    THE_OPERATOR:
       begin
-        iStatus := InputStatus.SECOND_NUM;
+        if currOperator = #0 then
+        begin
+          self.reset;
+          currResult := inputNum;
+          result := FloatToStr(self.currResult);
+          exit;
+        end;
+        iStatus := SECOND_NUM;
         secondOperand := inputNum;
         result := FloatToStr(self.secondOperand);
       end;
-    InputStatus.SECOND_NUM:
+    SECOND_NUM:
       begin
         secondOperand := secondOperand * 10 + inputNum;
         result := FloatToStr(self.secondOperand);
@@ -169,20 +191,20 @@ begin
   begin
     self.reset;
     currExp := '0';
-    iStatus := InputStatus.FIRST_NUM;
+    iStatus := FIRST_NUM;
   end;
 
   case iStatus of
 
-    InputStatus.FIRST_NUM:
+    FIRST_NUM:
       begin
         currExp := FloatToStr(currResult);
-        iStatus := InputStatus.THE_OPERATOR;
+        iStatus := THE_OPERATOR;
         currOperator := inputChar;
         result := currOperator;
       end;
 
-    InputStatus.THE_OPERATOR:
+    THE_OPERATOR:
       begin
         if currOperator = inputChar then
         begin
@@ -199,11 +221,11 @@ begin
         result := FloatToStr(currResult);
       end;
 
-    InputStatus.SECOND_NUM:
+    SECOND_NUM:
       begin
         self.calculateWithOperand;
         result := FloatToStr(self.currResult);
-        iStatus := InputStatus.THE_OPERATOR;
+        iStatus := THE_OPERATOR;
         currOperator := inputChar;
       end;
   end;

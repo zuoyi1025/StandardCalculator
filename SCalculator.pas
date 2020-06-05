@@ -54,6 +54,7 @@ type
     procedure tbnEqualsToKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure tbnBackspaceClick(Sender: TObject);
+    procedure tbnClearEntryClick(Sender: TObject);
 
   private
     { Private-Deklarationen }
@@ -86,6 +87,12 @@ begin
   sCal.reset;
   tlbResult.caption := '0';
   tlbExpression.caption := '';
+end;
+
+procedure TForm1.tbnClearEntryClick(Sender: TObject);
+begin
+  sCal.clearEntry;
+  tlbResult.caption := '0';
 end;
 
 procedure TForm1.form1OnShow(Sender: TObject);
