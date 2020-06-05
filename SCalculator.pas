@@ -94,7 +94,7 @@ end;
 
 procedure TForm1.tbnAddClick(Sender: TObject);
 begin
-  tlbResult.caption := sCal.updateWithChar('+');
+  tlbResult.caption := sCal.updateWithOperator('+');
   updateExpCaption(sCal.ResultExpression);
 end;
 
@@ -106,7 +106,7 @@ end;
 
 procedure TForm1.tbnDivideClick(Sender: TObject);
 begin
-  tlbResult.caption := sCal.updateWithChar('/');
+  tlbResult.caption := sCal.updateWithOperator('/');
   updateExpCaption(sCal.ResultExpression);
 end;
 
@@ -196,13 +196,13 @@ end;
 
 procedure TForm1.tbnMinusClick(Sender: TObject);
 begin
-  tlbResult.caption := sCal.updateWithChar('-');
+  tlbResult.caption :=sCal.updateWithOperator('-');
   updateExpCaption(sCal.ResultExpression);
 end;
 
 procedure TForm1.tbnMultipleClick(Sender: TObject);
 begin
-  tlbResult.caption := sCal.updateWithChar('*');
+  tlbResult.caption := sCal.updateWithOperator('*');
   updateExpCaption(sCal.ResultExpression);
 
 end;

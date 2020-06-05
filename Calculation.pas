@@ -6,23 +6,24 @@ uses
   System.SysUtils, Dialogs, StrUtils;
 
 type
+  InputStatus = (FIRST_NUM, THE_OPERATOR, SECOND_NUM);
 
   Calculator = Class
   private
-    currResult: real; // the real number in the upper line of result
     currExp: string; // the current expresion, may ends with operator
-    currOperator: Char; // the last saved operator
 
-    currOperand: Integer; // the integer in the lower line of input
-    tempOperand: Integer;
-    // the temporary value to check if the integer is ouf of bound
+    currResult: real; // current result = the first oeprand!!
+    currOperator: Char; // the last saved operator
+    secondOperand: real;
+
+    iStatus: InputStatus;
 
   public
 
     procedure calculateWithOperand;
     procedure clear;
     function updateWithNum(inputNum: Integer): String;
-    function updateWithChar(inputChar: Char): String;
+    function updateWithOperator(inputChar: Char): String;
     constructor Create;
 
     property ResultExpression: String read currExp;
@@ -39,8 +40,9 @@ begin
 
   currExp := '';
   currResult := 0;
-  currOperand := 0;
+  secondOperand := 0;
   currOperator := #0;
+  iStatus := InputStatus.FIRST_NUM;
 end;
 
 // clear all values
@@ -48,33 +50,36 @@ procedure Calculator.clear;
 begin
   currExp := '';
   currResult := 0;
-  currOperand := 0;
+  secondOperand := 0;
   currOperator := #0;
-
+  iStatus := InputStatus.FIRST_NUM;
 end;
 
 // calculate the temporary result with the operand
 procedure Calculator.calculateWithOperand;
 begin
+  if iStatus <> InputStatus.SECOND_NUM then
+    exit;
+
   case currOperator of
     '+':
       begin
-        currResult := currResult + currOperand;
+        currResult := currResult + secondOperand;
       end;
 
     '-':
       begin
-        currResult := currResult - currOperand;
+        currResult := currResult - secondOperand;
       end;
 
     '*':
       begin
-        currResult := currResult * currOperand;
+        currResult := currResult * secondOperand;
       end;
 
     '/':
       begin
-        if currOperand = 0 then
+        if secondOperand = 0 then
         begin
           currResult := 0;
           currExp := 'ERROR DIV BY 0';
@@ -82,80 +87,97 @@ begin
         end
         else
         begin
-          currResult := currResult / currOperand;
+          currResult := currResult / secondOperand;
         end;
       end;
   end;
-  currOperand := 0;
+  secondOperand := 0;
   currOperator := #0;
+  iStatus := InputStatus.THE_OPERATOR;
 end;
 
-// update currResult or currOperand according to input number
+// update currResult or secondOperand according to input number
 function Calculator.updateWithNum(inputNum: Integer): String;
-begin
-  if (currExp = 'ERROR DIV BY 0') or (currExp = '') then
-  begin
-    currExp := IntToStr(inputNum);
-  end
-  else
-    currExp := currExp + IntToStr(inputNum);
-
-
- // tempOperand := ;
-//  if (tempOperand > 2147483647) or (tempOperand < 0) then
-//    exit;
-//TODO: bug fix: operand out of bound
-
-  if currOperator <> #0 then
-  begin
-
-    currOperand := currOperand * 10 + inputNum;
-    result := FloatToStr(self.currOperand);
-  end
-  else if currResult <> 0 then
-  begin
-    currResult := currResult * 10 + inputNum;
-    result := FloatToStr(self.currResult);
-  end
-  else
-  begin
-    currResult := inputNum;
-    result := FloatToStr(self.currResult);
-  end;
-
-
-end;
-
-//
-function Calculator.updateWithChar(inputChar: Char): String;
 begin
   if (currExp = 'ERROR DIV BY 0') then
   begin
-    currExp := '0';
-  end
-  else if (RightStr(currExp, 1) = '+') or (RightStr(currExp, 1) = '-') or
-    (RightStr(currExp, 1) = '*') or (RightStr(currExp, 1) = '/') or
-    (RightStr(currExp, 1) = '=') then
-  begin
-    delete(currExp, length(currExp), 1);
+    self.clear;
+    currExp := IntToStr(inputNum);
+    iStatus := InputStatus.FIRST_NUM;
   end;
 
-  if currOperator <> #0 then
+  case iStatus of
+    InputStatus.FIRST_NUM:
+      begin
+        currResult := currResult * 10 + inputNum;
+        result := FloatToStr(self.currResult);
+      end;
+    InputStatus.THE_OPERATOR:
+      begin
+        iStatus := InputStatus.SECOND_NUM;
+        secondOperand := inputNum;
+        result := FloatToStr(self.secondOperand);
+      end;
+    InputStatus.SECOND_NUM:
+      begin
+        secondOperand := secondOperand * 10 + inputNum;
+        result := FloatToStr(self.secondOperand);
+
+      end;
+  end;
+
+  currExp := currExp + IntToStr(inputNum);
+end;
+
+//
+function Calculator.updateWithOperator(inputChar: Char): String;
+begin
+  // start a new calculation
+  if (currExp = 'ERROR DIV BY 0') then
   begin
-    self.calculateWithOperand;
-    currOperator := inputChar;
-    if (RightStr(currExp, 1) <> ')') or (LeftStr(currExp, 1) <> '(') then
-      currExp := '(' + currExp + ')';
-    currExp := currExp + inputChar;
-    result := FloatToStr(self.currResult);
-    exit;
+    self.clear;
+    currExp := '0';
+    iStatus := InputStatus.FIRST_NUM;
+  end;
+
+  case iStatus of
+
+    InputStatus.FIRST_NUM:
+      begin
+        currExp := FloatToStr(currResult);
+        iStatus := InputStatus.THE_OPERATOR;
+        currOperator := inputChar;
+        result := currOperator;
+      end;
+
+    InputStatus.THE_OPERATOR:
+      begin
+        if currOperator = inputChar then
+        begin
+          result := currOperator;
+          exit;
+        end
+        else if currOperator <> #0 then
+        begin
+          // truncate the last operator char in expression
+          delete(currExp, length(currExp), 1);
+          currOperator := #0;
+        end;
+        currOperator := inputChar;
+        result := currOperator;
+      end;
+
+    InputStatus.SECOND_NUM:
+      begin
+        currExp := '(' + currExp + ')';
+        self.calculateWithOperand;
+        result := FloatToStr(self.currResult);
+        iStatus := InputStatus.THE_OPERATOR;
+        currOperator := inputChar;
+      end;
   end;
 
   currExp := currExp + inputChar;
-
-  currOperator := inputChar;
-  result := self.currOperator;
-
 end;
 
 end.

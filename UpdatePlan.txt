@@ -3,6 +3,3 @@
 
 #BACKSPACE Taste
 
-#ENTER
-
-//TODO: bug fix: operand out of bound
