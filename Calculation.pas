@@ -21,7 +21,7 @@ type
   public
 
     procedure calculateWithOperand;
-    procedure clear;
+    procedure reset;
     function updateWithNum(inputNum: Integer): String;
     function updateWithOperator(inputChar: Char): String;
     constructor Create;
@@ -45,8 +45,8 @@ begin
   iStatus := InputStatus.FIRST_NUM;
 end;
 
-// clear all values
-procedure Calculator.clear;
+// reset all values
+procedure Calculator.reset;
 begin
   currExp := '';
   currResult := 0;
@@ -101,7 +101,7 @@ function Calculator.updateWithNum(inputNum: Integer): String;
 begin
   if (currExp = 'ERROR DIV BY 0') then
   begin
-    self.clear;
+    self.reset;
     currExp := IntToStr(inputNum);
     iStatus := InputStatus.FIRST_NUM;
   end;
@@ -135,7 +135,7 @@ begin
   // start a new calculation
   if (currExp = 'ERROR DIV BY 0') then
   begin
-    self.clear;
+    self.reset;
     currExp := '0';
     iStatus := InputStatus.FIRST_NUM;
   end;

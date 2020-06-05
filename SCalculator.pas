@@ -80,7 +80,7 @@ end;
 
 procedure TForm1.btnClearClick(Sender: TObject);
 begin
-  sCal.clear;
+  sCal.reset;
   tlbResult.caption := '0';
   tlbExpression.caption := '';
 end;
