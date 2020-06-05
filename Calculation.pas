@@ -15,8 +15,8 @@ type
     currResult: real; // current result = the first oeprand!!
     currOperator: Char; // the last saved operator
     secondOperand: real;
-
     iStatus: InputStatus;
+    function getNewStringAfterBackspace(var realNum: real): String;
 
   public
 
@@ -24,18 +24,19 @@ type
     procedure reset;
     function updateWithNum(inputNum: Integer): String;
     function updateWithOperator(inputChar: Char): String;
+    function backspace: String;
     constructor Create;
 
     property ResultExpression: String read currExp;
     // TODO:func updates resExp
     property ResultNumber: real read currResult;
+    // property ResultString: String read getResultString;
 
   End;
 
 implementation
 
-// constructor
-constructor Calculator.Create;
+constructor Calculator.Create; // constructor
 begin
 
   currExp := '';
@@ -45,8 +46,17 @@ begin
   iStatus := InputStatus.FIRST_NUM;
 end;
 
-// reset all values
-procedure Calculator.reset;
+function Calculator.getNewStringAfterBackspace(var realNum: real): String;
+begin
+  result := FloatToStr(realNum);
+  delete(result, length(result), 1);
+  if result = '' then
+    realNum := 0
+  else
+    realNum := StrToFloat(result);
+end;
+
+procedure Calculator.reset; // reset all values
 begin
   currExp := '';
   currResult := 0;
@@ -55,11 +65,34 @@ begin
   iStatus := InputStatus.FIRST_NUM;
 end;
 
-// calculate the temporary result with the operand
+function Calculator.backspace: String;
+begin
+  case iStatus of
+    InputStatus.FIRST_NUM:
+      begin
+        result := self.getNewStringAfterBackspace(currResult);
+      end;
+    InputStatus.THE_OPERATOR:
+      begin
+        result := FloatToStr(currResult);
+      end;
+    InputStatus.SECOND_NUM:
+      begin
+        result := self.getNewStringAfterBackspace(secondOperand);
+      end;
+  end;
+
+end;
+
 procedure Calculator.calculateWithOperand;
+// calculate the temporary result with the operand
+
 begin
   if iStatus <> InputStatus.SECOND_NUM then
     exit;
+
+  currExp := currExp + FloatToStr(secondOperand);
+  currExp := '(' + currExp + ')';
 
   case currOperator of
     '+':
@@ -96,8 +129,8 @@ begin
   iStatus := InputStatus.THE_OPERATOR;
 end;
 
-// update currResult or secondOperand according to input number
 function Calculator.updateWithNum(inputNum: Integer): String;
+// update currResult or secondOperand according to input number
 begin
   if (currExp = 'ERROR DIV BY 0') then
   begin
@@ -126,11 +159,10 @@ begin
       end;
   end;
 
-  currExp := currExp + IntToStr(inputNum);
 end;
 
-//
 function Calculator.updateWithOperator(inputChar: Char): String;
+// deals with + - * /
 begin
   // start a new calculation
   if (currExp = 'ERROR DIV BY 0') then
@@ -154,7 +186,7 @@ begin
       begin
         if currOperator = inputChar then
         begin
-          result := currOperator;
+          result := FloatToStr(currResult);
           exit;
         end
         else if currOperator <> #0 then
@@ -164,12 +196,11 @@ begin
           currOperator := #0;
         end;
         currOperator := inputChar;
-        result := currOperator;
+        result := FloatToStr(currResult);
       end;
 
     InputStatus.SECOND_NUM:
       begin
-        currExp := '(' + currExp + ')';
         self.calculateWithOperand;
         result := FloatToStr(self.currResult);
         iStatus := InputStatus.THE_OPERATOR;

@@ -273,7 +273,7 @@ object Form1: TForm1
     ParentFont = False
     OnClick = tbnAddClick
   end
-  object btnClear: TSpeedButton
+  object tbnClear: TSpeedButton
     Left = 200
     Top = 148
     Width = 100
@@ -285,7 +285,35 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    OnClick = btnClearClick
+    OnClick = tbnClearClick
+  end
+  object tbnClearEntry: TSpeedButton
+    Left = 100
+    Top = 148
+    Width = 100
+    Height = 62
+    Caption = 'CE'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    OnClick = tbnClearClick
+  end
+  object tbnBackspace: TSpeedButton
+    Left = 0
+    Top = 148
+    Width = 100
+    Height = 62
+    Caption = '<--'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    OnClick = tbnBackspaceClick
   end
   object tbnEqualsTo: TButton
     Left = 300

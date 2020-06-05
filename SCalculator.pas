@@ -29,12 +29,14 @@ type
     tbnAdd: TSpeedButton;
     tbnEqualsTo: TButton;
     tlbResult: TLabel;
-    btnClear: TSpeedButton;
+    tbnClear: TSpeedButton;
+    tbnClearEntry: TSpeedButton;
+    tbnBackspace: TSpeedButton;
     procedure tbnNum7Click(Sender: TObject);
     procedure form1OnShow(Sender: TObject);
     procedure tbnNum8Click(Sender: TObject);
     procedure tbnAddClick(Sender: TObject);
-    procedure btnClearClick(Sender: TObject);
+    procedure tbnClearClick(Sender: TObject);
     procedure tbnNum9Click(Sender: TObject);
     procedure tbnNum4Click(Sender: TObject);
     procedure tbnNum5Click(Sender: TObject);
@@ -51,6 +53,7 @@ type
     procedure tbnCommaClick(Sender: TObject);
     procedure tbnEqualsToKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure tbnBackspaceClick(Sender: TObject);
 
   private
     { Private-Deklarationen }
@@ -78,7 +81,7 @@ begin
   tlbResult.caption := FloatToStr(resultNumber);
 end;
 
-procedure TForm1.btnClearClick(Sender: TObject);
+procedure TForm1.tbnClearClick(Sender: TObject);
 begin
   sCal.reset;
   tlbResult.caption := '0';
@@ -88,7 +91,7 @@ end;
 procedure TForm1.form1OnShow(Sender: TObject);
 begin
   sCal := Calculation.Calculator.Create;
-  // ShowMessage('You can also use SPACE a ENTER');
+  // ShowMessage('You can also usbackspacee SPACE a ENTER');
 
 end;
 
@@ -96,6 +99,11 @@ procedure TForm1.tbnAddClick(Sender: TObject);
 begin
   tlbResult.caption := sCal.updateWithOperator('+');
   updateExpCaption(sCal.ResultExpression);
+end;
+
+procedure TForm1.tbnBackspaceClick(Sender: TObject);
+begin
+  tlbResult.caption := sCal.backspace();
 end;
 
 procedure TForm1.tbnCommaClick(Sender: TObject);
@@ -125,13 +133,17 @@ begin
   // TODO: BUG: ENTER oder SPACE wiederholt die letzte Eingabe
   // ShowMessage('the value of key is : ' + IntToStr(Key));
   case Key of
+    8:
+      begin
+        self.tbnBackspace.Click;
+      end;
     32:
       begin
         self.tbnEqualsTo.Click;
       end;
     67:
       begin
-        self.btnClear.Click;
+        self.tbnClear.Click;
       end;
     107:
       begin
@@ -196,7 +208,7 @@ end;
 
 procedure TForm1.tbnMinusClick(Sender: TObject);
 begin
-  tlbResult.caption :=sCal.updateWithOperator('-');
+  tlbResult.caption := sCal.updateWithOperator('-');
   updateExpCaption(sCal.ResultExpression);
 end;
 
